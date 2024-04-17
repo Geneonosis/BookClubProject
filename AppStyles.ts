@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-export const styles = StyleSheet.create({
+export const globalStyles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',

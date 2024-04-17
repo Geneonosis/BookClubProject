@@ -1,13 +1,13 @@
 import React from 'react';
 import {SafeAreaView, Text, Pressable} from 'react-native';
-import {styles} from '../AppStyles';
+import {globalStyles} from '../../../AppStyles';
 
 const BookScreen = ({navigation}: any) => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={globalStyles.safeArea}>
       <Text>Add a book to your library to get started!</Text>
       <Pressable
-        style={styles.customButton}
+        style={globalStyles.customButton}
         onPress={() => {
           //navigate to library
           navigation.navigate('Library');
