@@ -24,6 +24,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
     title: route.params?.bookItem ? route.params.bookItem.title : '',
     author: route.params?.bookItem ? route.params.bookItem.author : '',
     genre: route.params?.bookItem ? route.params.bookItem.genre : '',
+    focused: route.params?.bookItem ? route.params.bookItem.focused : false,
   });
 
   const bookEditMode = route.params?.bookItem ? true : false;
@@ -36,6 +37,42 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
   if (!context) {
     throw new Error('useLibrary must be used within a LibraryProvider');
   }
+
+  const showAlert = () => {
+    Alert.alert(
+      'Missing Fields',
+      'Please fill out all fields before adding a book.',
+      [{text: 'OK'}],
+      {cancelable: false},
+    );
+  };
+
+  /**
+   * funciton that handles a new book entry
+   * @returns nothing
+   */
+  const handleEditBook = () => {
+    if (book.title === '' || book.author === '' || book.genre === '') {
+      showAlert();
+      return;
+    }
+    const newLibrary = library.map(item => (item === oldBook ? book : item));
+    setLibrary(newLibrary);
+    navigation.navigate('Library');
+  };
+
+  /**
+   * function that handles a book being edited
+   * @returns nothing
+   */
+  const handleNewBook = () => {
+    if (book.title === '' || book.author === '' || book.genre === '') {
+      showAlert();
+      return;
+    }
+    setLibrary([...library, book]);
+    navigation.navigate('Library');
+  };
 
   const {library, setLibrary} = context;
 
@@ -78,26 +115,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
             <Pressable
               style={globalStyles.customButton}
               onPress={() => {
-                //find the old book in the list, and replace it with the new book
-                if (
-                  book.title === '' ||
-                  book.author === '' ||
-                  book.genre === ''
-                ) {
-                  Alert.alert(
-                    'Missing Fields',
-                    'Please fill out all fields before adding a book.',
-                    [{text: 'OK'}],
-                    {cancelable: false},
-                  );
-                  return;
-                }
-                console.log('edit a book: ', book);
-                const newLibrary = library.map(item =>
-                  item === oldBook ? book : item,
-                );
-                setLibrary(newLibrary);
-                navigation.navigate('Library');
+                handleEditBook();
               }}>
               <Text>Edit Book</Text>
             </Pressable>
@@ -105,25 +123,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
             <Pressable
               style={globalStyles.customButton}
               onPress={() => {
-                //TODO: implement global state management to add a book
-                //check if all fields are filled
-                if (
-                  book.title === '' ||
-                  book.author === '' ||
-                  book.genre === ''
-                ) {
-                  Alert.alert(
-                    'Missing Fields',
-                    'Please fill out all fields before adding a book.',
-                    [{text: 'OK'}],
-                    {cancelable: false},
-                  );
-                  return;
-                }
-                console.log('Add a book: ', book);
-                setLibrary([...library, book]);
-                //navigate to library
-                navigation.navigate('Library');
+                handleNewBook();
               }}>
               <Text>Add Book</Text>
             </Pressable>
@@ -132,7 +132,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
             style={globalStyles.customButtonCancel}
             onPress={() => {
               //navigate to library
-              navigation.navigate('Library');
+              navigation.goBack();
             }}>
             <Text>Cancel</Text>
           </Pressable>

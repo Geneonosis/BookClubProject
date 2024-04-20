@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 /**
  * props for the BookListItem MetaData Props
  */
-interface BLIMetaDataProps {
+interface BookListItemMetaDataProps {
   icon: string;
   labelText: string;
   color?: string;
@@ -19,12 +19,12 @@ interface BLIMetaDataProps {
  * @param size - optional, to change the size of the icon
  * @returns
  */
-const BLIMetaData = ({
+const BookListItemMetaData = ({
   icon,
   labelText,
   color = '#8BB174',
   size = 24,
-}: BLIMetaDataProps) => {
+}: BookListItemMetaDataProps) => {
   return (
     <>
       <Icon name={icon} size={size} color={color}></Icon>
@@ -33,4 +33,4 @@ const BLIMetaData = ({
   );
 };
 
-export default BLIMetaData;
+export default BookListItemMetaData;

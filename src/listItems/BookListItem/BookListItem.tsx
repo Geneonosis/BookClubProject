@@ -5,8 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Book} from '../../interfaces/Book';
 import {globalStyles} from '../../../AppStyles';
 import {LibraryContext} from '../../../App';
-import BLIMetaData from './BLIMetaData';
-import {useNavigation} from '@react-navigation/native';
+import BookListItemMetaData from './BookListItemMetaData';
 
 interface BookListItemProps {
   bookItem: Book;
@@ -52,6 +51,21 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
     navigation.navigate('NewBook', {bookItem});
   };
 
+  const handleBookMark = (bookItem: Book) => {
+    //if the user clicks on this toggle, it shoudl change the focused item from true to false, and if ANY OTHER BOOK
+    // is set to focused it removes that focus.
+
+    const newLibrary = library.map(book => {
+      if (book === bookItem) {
+        return {...book, focused: !book.focused};
+      } else {
+        return {...book, focused: false};
+      }
+    });
+
+    setLibrary(newLibrary);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.flexContainer}>
@@ -60,13 +74,20 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
           style={styles.imageContainer}
         />
         <View style={styles.dataContainer}>
-          <BLIMetaData icon="book" labelText={bookItem.title} />
-          <BLIMetaData icon="person" labelText={bookItem.author} />
-          <BLIMetaData icon="pricetag" labelText={bookItem.genre} />
+          <BookListItemMetaData icon="book" labelText={bookItem.title} />
+          <BookListItemMetaData icon="person" labelText={bookItem.author} />
+          <BookListItemMetaData icon="pricetag" labelText={bookItem.genre} />
         </View>
         <View style={styles.buttonContainer}>
-          <Pressable style={globalStyles.customButton}>
-            <Icon name="bookmark" size={24} color={'white'}></Icon>
+          <Pressable
+            style={globalStyles.customButton}
+            onPress={() => {
+              handleBookMark(bookItem);
+            }}>
+            <Icon
+              name={bookItem.focused ? 'bookmark' : 'bookmark-outline'}
+              size={24}
+              color={'white'}></Icon>
           </Pressable>
           <Pressable
             style={globalStyles.customEditButton}

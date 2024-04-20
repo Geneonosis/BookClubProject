@@ -4,4 +4,5 @@ export interface Book {
   author: string;
   genre: string;
   ISBN?: string;
+  focused: boolean;
 }
