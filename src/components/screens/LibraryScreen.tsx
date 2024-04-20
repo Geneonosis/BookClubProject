@@ -31,7 +31,9 @@ const LibraryScreen = ({navigation}: any) => {
         style={styles.flastListContainer}
         data={library}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => <BookListItem bookItem={item} />}
+        renderItem={({item}) => (
+          <BookListItem bookItem={item} navigation={navigation} />
+        )}
       />
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,6 +7,7 @@ import BookScreen from './src/components/screens/BookScreen';
 import {Book} from './src/interfaces/Book';
 import NewBookScreen from './src/components/screens/NewBookScreen';
 import LibraryScreen from './src/components/screens/LibraryScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LibraryContextType {
   library: Book[];
@@ -56,6 +57,34 @@ const tabNavigatorOptions = {
 
 const App = () => {
   const [library, setLibrary] = React.useState<Book[]>([]);
+  // load the library from async storage
+  useEffect(() => {
+    const loadLibrary = async () => {
+      try {
+        const storedLibrary = await AsyncStorage.getItem('library');
+        if (storedLibrary !== null) {
+          setLibrary(JSON.parse(storedLibrary));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadLibrary();
+  }, []);
+
+  //Save the library to async storage whenever it changes
+  useEffect(() => {
+    const saveLibrary = async () => {
+      try {
+        await AsyncStorage.setItem('library', JSON.stringify(library));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    saveLibrary();
+  }, [library]);
+
   return (
     <LibraryContext.Provider value={{library, setLibrary}}>
       <NavigationContainer>

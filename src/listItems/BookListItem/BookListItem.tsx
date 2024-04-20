@@ -6,12 +6,14 @@ import {Book} from '../../interfaces/Book';
 import {globalStyles} from '../../../AppStyles';
 import {LibraryContext} from '../../../App';
 import BLIMetaData from './BLIMetaData';
+import {useNavigation} from '@react-navigation/native';
 
 interface BookListItemProps {
   bookItem: Book;
+  navigation: any;
 }
 
-const BookListItem = ({bookItem}: BookListItemProps) => {
+const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
   const context = useContext(LibraryContext);
   if (!context) {
     throw new Error('useLibrary must be used within a LibraryProvider');
@@ -45,6 +47,11 @@ const BookListItem = ({bookItem}: BookListItemProps) => {
     );
   };
 
+  const handleEditBook = (bookItem: Book) => {
+    //TODO: should navigate to the book entry page with all the book stuff filled in and ready to edit
+    navigation.navigate('NewBook', {bookItem});
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.flexContainer}>
@@ -60,6 +67,13 @@ const BookListItem = ({bookItem}: BookListItemProps) => {
         <View style={styles.buttonContainer}>
           <Pressable style={globalStyles.customButton}>
             <Icon name="bookmark" size={24} color={'white'}></Icon>
+          </Pressable>
+          <Pressable
+            style={globalStyles.customEditButton}
+            onPress={() => {
+              handleEditBook(bookItem);
+            }}>
+            <Icon name="pencil" size={24} color={'white'}></Icon>
           </Pressable>
           <Pressable
             style={globalStyles.customButtonCancel}

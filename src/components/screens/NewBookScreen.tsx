@@ -12,13 +12,24 @@ import {
 } from 'react-native';
 import {globalStyles} from '../../../AppStyles';
 import {Input} from 'react-native-elements';
+import {NavigationProp, RouteProp} from '@react-navigation/native';
 
-const NewBookScreen = ({navigation}: any) => {
+interface NewBookScreenProps {
+  route: RouteProp<any, 'NewBook'>;
+  navigation: NavigationProp<any>;
+}
+
+const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
   const [book, setBook] = React.useState<Book>({
-    title: '',
-    author: '',
-    genre: '',
+    title: route.params?.bookItem ? route.params.bookItem.title : '',
+    author: route.params?.bookItem ? route.params.bookItem.author : '',
+    genre: route.params?.bookItem ? route.params.bookItem.genre : '',
   });
+
+  const bookEditMode = route.params?.bookItem ? true : false;
+  const oldBook = route.params?.bookItem;
+
+  console.log(bookEditMode);
 
   const context = useContext(LibraryContext);
 
@@ -34,6 +45,7 @@ const NewBookScreen = ({navigation}: any) => {
         <Text style={newBookStyles.headerText}>Add a new book</Text>
         <Input
           placeholder="Title *"
+          value={book.title}
           placeholderTextColor={'#FF6347'}
           inputContainerStyle={newBookStyles.textContainer}
           underlineColorAndroid={'transparent'}
@@ -43,6 +55,7 @@ const NewBookScreen = ({navigation}: any) => {
         />
         <Input
           placeholder="Author *"
+          value={book.author}
           placeholderTextColor={'#FF6347'}
           inputContainerStyle={newBookStyles.textContainer}
           underlineColorAndroid={'transparent'}
@@ -51,7 +64,8 @@ const NewBookScreen = ({navigation}: any) => {
           }}
         />
         <Input
-          placeholder="Genre *"
+          placeholder={'Genre *'}
+          value={book.genre}
           placeholderTextColor={'#FF6347'}
           inputContainerStyle={newBookStyles.textContainer}
           underlineColorAndroid={'transparent'}
@@ -60,31 +74,60 @@ const NewBookScreen = ({navigation}: any) => {
           }}
         />
         <View style={newBookStyles.buttonContainer}>
-          <Pressable
-            style={globalStyles.customButton}
-            onPress={() => {
-              //TODO: implement global state management to add a book
-              //check if all fields are filled
-              if (
-                book.title === '' ||
-                book.author === '' ||
-                book.genre === ''
-              ) {
-                Alert.alert(
-                  'Missing Fields',
-                  'Please fill out all fields before adding a book.',
-                  [{text: 'OK'}],
-                  {cancelable: false},
+          {bookEditMode ? (
+            <Pressable
+              style={globalStyles.customButton}
+              onPress={() => {
+                //find the old book in the list, and replace it with the new book
+                if (
+                  book.title === '' ||
+                  book.author === '' ||
+                  book.genre === ''
+                ) {
+                  Alert.alert(
+                    'Missing Fields',
+                    'Please fill out all fields before adding a book.',
+                    [{text: 'OK'}],
+                    {cancelable: false},
+                  );
+                  return;
+                }
+                console.log('edit a book: ', book);
+                const newLibrary = library.map(item =>
+                  item === oldBook ? book : item,
                 );
-                return;
-              }
-              console.log('Add a book: ', book);
-              setLibrary([...library, book]);
-              //navigate to library
-              navigation.navigate('Library');
-            }}>
-            <Text>Add Book</Text>
-          </Pressable>
+                setLibrary(newLibrary);
+                navigation.navigate('Library');
+              }}>
+              <Text>Edit Book</Text>
+            </Pressable>
+          ) : (
+            <Pressable
+              style={globalStyles.customButton}
+              onPress={() => {
+                //TODO: implement global state management to add a book
+                //check if all fields are filled
+                if (
+                  book.title === '' ||
+                  book.author === '' ||
+                  book.genre === ''
+                ) {
+                  Alert.alert(
+                    'Missing Fields',
+                    'Please fill out all fields before adding a book.',
+                    [{text: 'OK'}],
+                    {cancelable: false},
+                  );
+                  return;
+                }
+                console.log('Add a book: ', book);
+                setLibrary([...library, book]);
+                //navigate to library
+                navigation.navigate('Library');
+              }}>
+              <Text>Add Book</Text>
+            </Pressable>
+          )}
           <Pressable
             style={globalStyles.customButtonCancel}
             onPress={() => {

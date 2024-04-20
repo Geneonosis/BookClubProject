@@ -16,6 +16,13 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
   },
+  customEditButton: {
+    padding: 10,
+    backgroundColor: '#74acb1',
+    borderRadius: 5,
+    alignItems: 'center',
+    margin: 10,
+  },
   customButtonCancel: {
     padding: 10,
     backgroundColor: '#FF6347',
