@@ -89,7 +89,7 @@ const App = () => {
     <LibraryContext.Provider value={{library, setLibrary}}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={stackNavigatorOptions}>
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" options={{headerShown: false}}>
             {() => (
               <Tab.Navigator
                 screenOptions={({route}) => ({
@@ -107,8 +107,16 @@ const App = () => {
                   },
                   ...tabNavigatorOptions,
                 })}>
-                <Tab.Screen name="Library" component={LibraryScreen} />
-                <Tab.Screen name="Book" component={BookScreen} />
+                <Tab.Screen
+                  name="Library"
+                  component={LibraryScreen}
+                  options={{headerTitleStyle: {color: 'white'}}}
+                />
+                <Tab.Screen
+                  name="Book"
+                  component={BookScreen}
+                  options={{headerTitleStyle: {color: 'white'}}}
+                />
               </Tab.Navigator>
             )}
           </Stack.Screen>

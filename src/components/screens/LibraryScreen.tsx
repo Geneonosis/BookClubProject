@@ -6,6 +6,7 @@ import {
   Pressable,
   FlatList,
   StyleSheet,
+  View,
 } from 'react-native';
 import {globalStyles} from '../../../AppStyles';
 import BookListItem from '../../listItems/BookListItem/BookListItem';
@@ -19,14 +20,15 @@ const LibraryScreen = ({navigation}: any) => {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <Text>Home Screen</Text>
-      <Pressable
-        style={globalStyles.customButton}
-        onPress={() => {
-          navigation.navigate('NewBook');
-        }}>
-        <Text>Add A Book</Text>
-      </Pressable>
+      <View style={styles.newBookButtonContainer}>
+        <Pressable
+          style={globalStyles.customButton}
+          onPress={() => {
+            navigation.navigate('NewBook');
+          }}>
+          <Text>Add A Book</Text>
+        </Pressable>
+      </View>
       <FlatList
         style={styles.flastListContainer}
         data={library}
@@ -44,5 +46,11 @@ export default LibraryScreen;
 const styles = StyleSheet.create({
   flastListContainer: {
     width: '100%',
+  },
+  newBookButtonContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
   },
 });

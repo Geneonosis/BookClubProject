@@ -25,6 +25,9 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
     //remove the book from the library using a filter and store the newLibrary state
     const newLibrary = library.filter(book => book.title !== bookItem.title);
     //create an alert to confirm the removal, before updating the library
+
+    bookItem.focused = false;
+
     Alert.alert(
       'Remove Book',
       'Are you sure you want to remove this book from your library?',
