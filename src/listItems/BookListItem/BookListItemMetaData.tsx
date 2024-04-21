@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 /**
@@ -26,11 +26,21 @@ const BookListItemMetaData = ({
   size = 24,
 }: BookListItemMetaDataProps) => {
   return (
-    <>
+    <View style={styles.dataContainer}>
       <Icon name={icon} size={size} color={color}></Icon>
-      <Text>{labelText}</Text>
-    </>
+      <Text style={styles.textData}>{labelText}</Text>
+    </View>
   );
 };
 
 export default BookListItemMetaData;
+
+const styles = StyleSheet.create({
+  dataContainer: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+  },
+  textData: {
+    paddingLeft: 12,
+  },
+});

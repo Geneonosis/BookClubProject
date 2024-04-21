@@ -29,14 +29,18 @@ const LibraryScreen = ({navigation}: any) => {
           <Text>Add A Book</Text>
         </Pressable>
       </View>
-      <FlatList
-        style={styles.flastListContainer}
-        data={library}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => (
-          <BookListItem bookItem={item} navigation={navigation} />
-        )}
-      />
+      {library.length === 0 ? (
+        <Text>No books in library, Add a book to get started!</Text>
+      ) : (
+        <FlatList
+          style={styles.flastListContainer}
+          data={library}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <BookListItem bookItem={item} navigation={navigation} />
+          )}
+        />
+      )}
     </SafeAreaView>
   );
 };

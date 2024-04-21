@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   },
   dataContainer: {
     margin: 10,
+    flex: 1,
   },
   buttonContainer: {
     backgroundColor: 'white',
