@@ -2,32 +2,10 @@ import React from 'react';
 import {SafeAreaView, Text, Pressable, View, StyleSheet} from 'react-native';
 import {globalStyles} from '../../../AppStyles';
 import {useContext} from 'react';
-import {LibraryContext} from '../../../App';
+//import {LibraryContext} from '../../../App';
 import {Image} from 'react-native-elements';
 
 const BookScreen = ({navigation}: any) => {
-  const context = useContext(LibraryContext);
-  if (!context) {
-    throw new Error('useLibrary must be used within a LibraryProvider');
-  }
-  const {library, setLibrary} = context;
-  console.log(library.length);
-
-  //get the focused book from the library
-  const focusedBook = library.filter(book => book.focused === true)[0];
-
-  //if there is no focused book in the library tell the user to select a book
-  if (
-    (focusedBook === undefined || focusedBook === null) &&
-    library.length > 0
-  ) {
-    return (
-      <SafeAreaView style={globalStyles.safeArea}>
-        <Text>No book selected to focus on</Text>
-      </SafeAreaView>
-    );
-  }
-
   const handleNoBooksInLibrary = () => {
     return (
       <>
@@ -53,20 +31,16 @@ const BookScreen = ({navigation}: any) => {
           />
         </View>
         <View style={styles.contentContainer}>
-          <Text>TITLE: {focusedBook.title}</Text>
-          <Text>AUTHOR: {focusedBook.author}</Text>
-          <Text>GENRE: {focusedBook.genre}</Text>
+          <Text>TITLE: </Text>
+          <Text>AUTHOR: </Text>
+          <Text>GENRE: </Text>
           <Text>Placeholder description text</Text>
         </View>
       </>
     );
   };
 
-  return (
-    <SafeAreaView style={globalStyles.safeArea}>
-      {library.length === 0 ? handleNoBooksInLibrary() : handleBookDisplay()}
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={globalStyles.safeArea}></SafeAreaView>;
 };
 
 export default BookScreen;

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Book} from './../../interfaces/Book';
-import {LibraryContext} from '../../../App';
+//import {LibraryContext} from '../../../App';
 import {
   SafeAreaView,
   StyleSheet,
@@ -32,12 +32,6 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
 
   console.log(bookEditMode);
 
-  const context = useContext(LibraryContext);
-
-  if (!context) {
-    throw new Error('useLibrary must be used within a LibraryProvider');
-  }
-
   const showAlert = () => {
     Alert.alert(
       'Missing Fields',
@@ -56,8 +50,6 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
       showAlert();
       return;
     }
-    const newLibrary = library.map(item => (item === oldBook ? book : item));
-    setLibrary(newLibrary);
     navigation.navigate('Library');
   };
 
@@ -70,11 +62,8 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
       showAlert();
       return;
     }
-    setLibrary([...library, book]);
     navigation.navigate('Library');
   };
-
-  const {library, setLibrary} = context;
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>

@@ -4,7 +4,7 @@ import {Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Book} from '../../interfaces/Book';
 import {globalStyles} from '../../../AppStyles';
-import {LibraryContext} from '../../../App';
+//import {LibraryContext} from '../../../App';
 import BookListItemMetaData from './BookListItemMetaData';
 
 interface BookListItemProps {
@@ -13,17 +13,11 @@ interface BookListItemProps {
 }
 
 const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
-  const context = useContext(LibraryContext);
-  if (!context) {
-    throw new Error('useLibrary must be used within a LibraryProvider');
-  }
-  const {library, setLibrary} = context;
-
   const handleRemoveBook = (bookItem: Book) => {
     //TODO: Remove a book from the library
     console.log('Remove a book');
     //remove the book from the library using a filter and store the newLibrary state
-    const newLibrary = library.filter(book => book.title !== bookItem.title);
+
     //create an alert to confirm the removal, before updating the library
 
     bookItem.focused = false;
@@ -41,7 +35,6 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            setLibrary(newLibrary);
           },
         },
       ],
@@ -57,16 +50,6 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
   const handleBookMark = (bookItem: Book) => {
     //if the user clicks on this toggle, it shoudl change the focused item from true to false, and if ANY OTHER BOOK
     // is set to focused it removes that focus.
-
-    const newLibrary = library.map(book => {
-      if (book === bookItem) {
-        return {...book, focused: !book.focused};
-      } else {
-        return {...book, focused: false};
-      }
-    });
-
-    setLibrary(newLibrary);
   };
 
   return (

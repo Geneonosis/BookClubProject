@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {LibraryContext} from '../../../App';
+//import {LibraryContext} from '../../../App';
 import {
   SafeAreaView,
   Text,
@@ -12,12 +12,6 @@ import {globalStyles} from '../../../AppStyles';
 import BookListItem from '../../listItems/BookListItem/BookListItem';
 
 const LibraryScreen = ({navigation}: any) => {
-  const context = useContext(LibraryContext);
-  if (!context) {
-    throw new Error('useLibrary must be used within a LibraryProvider');
-  }
-  const {library, setLibrary} = context;
-
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <View style={styles.newBookButtonContainer}>
@@ -29,7 +23,7 @@ const LibraryScreen = ({navigation}: any) => {
           <Text>Add A Book</Text>
         </Pressable>
       </View>
-      {library.length === 0 ? (
+      {/* insert-library-here === 0 ? (
         <Text>No books in library, Add a book to get started!</Text>
       ) : (
         <FlatList
@@ -40,7 +34,7 @@ const LibraryScreen = ({navigation}: any) => {
             <BookListItem bookItem={item} navigation={navigation} />
           )}
         />
-      )}
+      )} */}
     </SafeAreaView>
   );
 };
