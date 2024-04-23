@@ -11,12 +11,9 @@ const BookScreen = ({navigation}: any) => {
     throw new Error('useLibrary must be used within a LibraryProvider');
   }
   const {library, setLibrary} = context;
-  console.log(library.length);
 
-  //get the focused book from the library
   const focusedBook = library.filter(book => book.focused === true)[0];
 
-  //if there is no focused book in the library tell the user to select a book
   if (
     (focusedBook === undefined || focusedBook === null) &&
     library.length > 0

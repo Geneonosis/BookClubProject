@@ -20,6 +20,10 @@ interface NewBookScreenProps {
 }
 
 const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
+  //TODO: create the library context
+  //TODO: set up error check for context
+  //TODO: set up the library context variables
+
   const [book, setBook] = React.useState<Book>({
     title: route.params?.bookItem ? route.params.bookItem.title : '',
     author: route.params?.bookItem ? route.params.bookItem.author : '',
@@ -50,6 +54,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
       showAlert();
       return;
     }
+    //TODO set up a new library array with the edited book
     navigation.navigate('Library');
   };
 
@@ -62,6 +67,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
       showAlert();
       return;
     }
+    //TODO set up a new library array with the new book
     navigation.navigate('Library');
   };
 
@@ -148,7 +154,6 @@ const newBookStyles: any = StyleSheet.create({
     paddingHorizontal: 15,
     margin: 3,
     borderRadius: 8,
-    //drop shadow
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -156,11 +161,10 @@ const newBookStyles: any = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    //android
     elevation: 5,
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',
-    borderBottomWidth: 0, // remove the border on both iOS and Android
+    borderBottomWidth: 0,
   },
 });

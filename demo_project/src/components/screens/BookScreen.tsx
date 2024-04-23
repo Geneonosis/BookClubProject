@@ -6,6 +6,12 @@ import {useContext} from 'react';
 import {Image} from 'react-native-elements';
 
 const BookScreen = ({navigation}: any) => {
+  // TODO: set the library context, error check, and set the context variables
+
+  const focusedBook = undefined; //TODO: update here to get the focused book from the library
+
+  //TODO: conditionally return screen. If there is no focused book, return a message saying no book is focused
+
   const handleNoBooksInLibrary = () => {
     return (
       <>
@@ -31,16 +37,21 @@ const BookScreen = ({navigation}: any) => {
           />
         </View>
         <View style={styles.contentContainer}>
-          <Text>TITLE: </Text>
-          <Text>AUTHOR: </Text>
-          <Text>GENRE: </Text>
+          {/*TODO: uncomment when focused book is fixed */}
+          {/* <Text>TITLE: {focusedBook.title}</Text>
+          <Text>AUTHOR: {focusedBook.author}</Text>
+          <Text>GENRE: {focusedBook.genre}</Text> */}
           <Text>Placeholder description text</Text>
         </View>
       </>
     );
   };
 
-  return <SafeAreaView style={globalStyles.safeArea}></SafeAreaView>;
+  return (
+    <SafeAreaView style={globalStyles.safeArea}>
+      {/* TODO: Conditionally return handleNoBooksInLibrary or handleBookDisplay */}
+    </SafeAreaView>
+  );
 };
 
 export default BookScreen;

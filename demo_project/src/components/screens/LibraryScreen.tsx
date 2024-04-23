@@ -12,6 +12,9 @@ import {globalStyles} from '../../../AppStyles';
 import BookListItem from '../../listItems/BookListItem/BookListItem';
 
 const LibraryScreen = ({navigation}: any) => {
+  //TODO: set up the context
+  //TODO: set up error check for context
+  //TODO: set up the library context variables
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <View style={styles.newBookButtonContainer}>

@@ -13,14 +13,12 @@ interface BookListItemProps {
 }
 
 const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
+  //TODO: add library context, error check, and variables for the library context
+
   const handleRemoveBook = (bookItem: Book) => {
-    //TODO: Remove a book from the library
-    console.log('Remove a book');
-    //remove the book from the library using a filter and store the newLibrary state
-
-    //create an alert to confirm the removal, before updating the library
-
     bookItem.focused = false;
+
+    //TODO: set the newLibrary variable by filtering out the bookItem from the library
 
     Alert.alert(
       'Remove Book',
@@ -35,6 +33,7 @@ const BookListItem = ({bookItem, navigation}: BookListItemProps) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
+            //TODO: set the library to the newLibrary variable here
           },
         },
       ],
