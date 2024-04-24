@@ -26,11 +26,13 @@ const LibraryScreen = ({navigation}: any) => {
           onPress={() => {
             navigation.navigate('NewBook');
           }}>
-          <Text>Add A Book</Text>
+          <Text style={{color: 'black'}}>Add A Book</Text>
         </Pressable>
       </View>
       {library.length === 0 ? (
-        <Text>No books in library, Add a book to get started!</Text>
+        <Text style={{color: 'black'}}>
+          No books in library, Add a book to get started!
+        </Text>
       ) : (
         <FlatList
           style={styles.flastListContainer}

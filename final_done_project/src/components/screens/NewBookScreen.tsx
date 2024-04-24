@@ -117,7 +117,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
               onPress={() => {
                 handleEditBook();
               }}>
-              <Text>Edit Book</Text>
+              <Text style={{color: 'black'}}>Edit Book</Text>
             </Pressable>
           ) : (
             <Pressable
@@ -125,7 +125,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
               onPress={() => {
                 handleNewBook();
               }}>
-              <Text>Add Book</Text>
+              <Text style={{color: 'black'}}>Add Book</Text>
             </Pressable>
           )}
           <Pressable
@@ -134,7 +134,7 @@ const NewBookScreen = ({route, navigation}: NewBookScreenProps) => {
               //navigate to library
               navigation.goBack();
             }}>
-            <Text>Cancel</Text>
+            <Text style={{color: 'black'}}>Cancel</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>
@@ -149,6 +149,7 @@ const newBookStyles: any = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'black',
   },
   buttonContainer: {
     flexDirection: 'row',

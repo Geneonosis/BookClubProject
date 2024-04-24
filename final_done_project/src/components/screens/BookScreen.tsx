@@ -20,7 +20,7 @@ const BookScreen = ({navigation}: any) => {
   ) {
     return (
       <SafeAreaView style={globalStyles.safeArea}>
-        <Text>No book selected to focus on</Text>
+        <Text style={{color: 'black'}}>No book selected to focus on</Text>
       </SafeAreaView>
     );
   }
@@ -28,13 +28,15 @@ const BookScreen = ({navigation}: any) => {
   const handleNoBooksInLibrary = () => {
     return (
       <>
-        <Text>Add a book to your library to get started!</Text>
+        <Text style={{color: 'black'}}>
+          Add a book to your library to get started!
+        </Text>
         <Pressable
           style={globalStyles.customButton}
           onPress={() => {
             navigation.navigate('Library');
           }}>
-          <Text>Take Me To My Library</Text>
+          <Text style={{color: 'black'}}>Take Me To My Library</Text>
         </Pressable>
       </>
     );
@@ -50,10 +52,10 @@ const BookScreen = ({navigation}: any) => {
           />
         </View>
         <View style={styles.contentContainer}>
-          <Text>TITLE: {focusedBook.title}</Text>
-          <Text>AUTHOR: {focusedBook.author}</Text>
-          <Text>GENRE: {focusedBook.genre}</Text>
-          <Text>Placeholder description text</Text>
+          <Text style={{color: 'black'}}>TITLE: {focusedBook.title}</Text>
+          <Text style={{color: 'black'}}>AUTHOR: {focusedBook.author}</Text>
+          <Text style={{color: 'black'}}>GENRE: {focusedBook.genre}</Text>
+          <Text style={{color: 'black'}}>Placeholder description text</Text>
         </View>
       </>
     );
