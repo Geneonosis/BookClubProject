@@ -42,5 +42,6 @@ const styles = StyleSheet.create({
   },
   textData: {
     paddingLeft: 12,
+    color: 'black',
   },
 });
